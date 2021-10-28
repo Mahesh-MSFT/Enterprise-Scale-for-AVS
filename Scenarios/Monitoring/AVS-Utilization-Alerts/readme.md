@@ -4,13 +4,13 @@ It is crucial to monitor the resource utilization in order to take timely action
 
 ## Prerequisites
 
-* AVS Private Cloud up and running
+* AVS Private Cloud up and running.
 
 * A list of email address(es) who will receive Alerts from Azure VMware Solution Private Cloud.
 
 ## Deployment Steps
 
-* Update the parameter values in appropriate location.
+* Update the parameter values in appropriate parameter file.
 
 * Run one of the following scripts.
 
@@ -36,4 +36,4 @@ az deployment group create -g AVS-Step-By-Step-RG -n AVS-Monitoring-Deployment -
 
 ## Next Steps
 
-[Configure SRM](../../Addins/SRM/readme.md)
+[Configure SRM](../../Addons/SRM/readme.md)

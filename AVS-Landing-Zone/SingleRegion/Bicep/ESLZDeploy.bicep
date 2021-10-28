@@ -3,6 +3,8 @@ targetScope = 'subscription'
 @description('The region the AVS Private Cloud & associated resources will be deployed to')
 param Location string
 @description('The prefix to use on resources inside this template')
+@minLength(1)
+@maxLength(20)
 param Prefix string = 'AVS'
 
 @description('The address space used for the AVS Private Cloud management networks. Must be a non-overlapping /22')
@@ -27,6 +29,8 @@ param JumpboxUsername string = 'avsjump'
 param JumpboxPassword string = ''
 @description('The subnet CIDR used for the Jumpbox VM Subnet. Must be a /26 or greater within the VNetAddressSpace')
 param JumpboxSubnet string = ''
+@description('The sku to use for the Jumpbox VM, must have quota for this within the target region')
+param JumpboxSku string = 'Standard_D2s_v3'
 @description('The subnet CIDR used for the Bastion Subnet. Must be a /26 or greater within the VNetAddressSpace')
 param BastionSubnet string = ''
 
@@ -41,18 +45,23 @@ param SRMLicenseKey string = ''
 @description('Number of vSphere Replication Servers to be created if SRM is deployed')
 param VRServerCount int = 1
 
+@description('Opt-out of deployment telemetry')
+param TelemetryOptOut bool = false
+
+var deploymentPrefix = 'AVS-${uniqueString(deployment().name, deployment().location)}'
 
 module AVSCore 'Modules/AVSCore.bicep' = {
-  name: '${deployment().name}-AVS'
+  name: '${deploymentPrefix}-AVS'
   params: {
     Prefix: Prefix
     Location: Location
     PrivateCloudAddressSpace: PrivateCloudAddressSpace
+    TelemetryOptOut: TelemetryOptOut
   }
 }
 
 module Networking 'Modules/Networking.bicep' = {
-  name: '${deployment().name}-Networking'
+  name: '${deploymentPrefix}-Network'
   params: {
     Prefix: Prefix
     Location: Location
@@ -63,7 +72,7 @@ module Networking 'Modules/Networking.bicep' = {
 }
 
 module VNetConnection 'Modules/VNetConnection.bicep' = {
-  name: '${deployment().name}-VNetConnection'
+  name: '${deploymentPrefix}-VNet'
   params: {
     GatewayName: Networking.outputs.GatewayName
     NetworkResourceGroup: Networking.outputs.NetworkResourceGroup
@@ -73,8 +82,8 @@ module VNetConnection 'Modules/VNetConnection.bicep' = {
   }
 }
 
-module Addins 'Modules/AVSAddins.bicep' = {
-  name: '${deployment().name}-AVSAddins'
+module Addons 'Modules/AVSAddons.bicep' = {
+  name: '${deploymentPrefix}-AVSAddons'
   params: {
     PrivateCloudName: AVSCore.outputs.PrivateCloudName
     PrivateCloudResourceGroup: AVSCore.outputs.PrivateCloudResourceGroupName
@@ -86,7 +95,7 @@ module Addins 'Modules/AVSAddins.bicep' = {
 }
 
 module Jumpbox 'Modules/JumpBox.bicep' = if (DeployJumpbox) {
-  name: '${deployment().name}-Jumpbox'
+  name: '${deploymentPrefix}-Jumpbox'
   params: {
     Prefix: Prefix
     Location: Location
@@ -96,11 +105,12 @@ module Jumpbox 'Modules/JumpBox.bicep' = if (DeployJumpbox) {
     VNetResourceGroup: Networking.outputs.NetworkResourceGroup
     BastionSubnet: BastionSubnet
     JumpboxSubnet: JumpboxSubnet
+    JumpboxSku: JumpboxSku
   }
 }
 
 module OperationalMonitoring 'Modules/Monitoring.bicep' = {
-  name: '${deployment().name}-Monitoring'
+  name: '${deploymentPrefix}-Monitoring'
   params: {
     AlertEmails: AlertEmails
     Prefix: Prefix
@@ -111,17 +121,4 @@ module OperationalMonitoring 'Modules/Monitoring.bicep' = {
     VNetResourceId: Networking.outputs.VNetResourceId
     ExRConnectionResourceId: VNetConnection.outputs.ExRConnectionResourceId
   }
-}
-
-resource Telemetry 'Microsoft.Resources/deployments@2021-04-01' = {
-    name: 'pid-754599a0-0a6f-424a-b4c5-1b12be198ae8'
-    location: deployment().location
-    properties: {
-      mode: 'Incremental'
-      template: {
-        '$schema': 'https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#'
-        contentVersion: '1.0.0.0'
-        resources: []
-      }
-    }
 }
