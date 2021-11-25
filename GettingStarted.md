@@ -42,7 +42,7 @@ In the Greenfield scenario, no Azure infrastructure components for AVS on Azure 
 
 It is important to consider the life cycle of each of these components, if you want to deploy these items individually or via separate executions, then please see the Brownfield Deployment section.
 
-The [AVS Single Region](AVS-Landing-Zone/SingleRegion) template provides a complete AVS landing zone reference implementation within a single template.
+The [AVS Single Region](AVS-Landing-Zone/GreenField) template provides a complete AVS landing zone reference implementation within a single template.
 
 ### Brownfield deployment
 
@@ -109,4 +109,4 @@ Alongside command-line deployment you can also choose to automate the deployment
 
 # Next Steps
 
-Once all the prerequisites are complete, head [here](AVS-Landing-Zone/SingleRegion) to deploy the AVS Landing Zone reference implementation or to [Scenarios](Scenarios) for single component deployment scenarios
+Once all the prerequisites are complete, head [here](AVS-Landing-Zone/GreenField) to deploy the AVS Landing Zone reference implementation or to [Scenarios](Scenarios) for single component deployment scenarios

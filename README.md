@@ -2,8 +2,8 @@
 
 * [Getting Started](GettingStarted.md)
 * [Deployment Scenarios](Scenarios)
-  * [AVS Landing Zone in a Single Region](AVS-Landing-Zone/SingleRegion)
-  * [AVS Single Component Deployments](Scenarios)
+  * [Greenfield Deployment](AVS-Landing-Zone/GreenField)
+  * [Brownfield Deployment](Scenarios)
 
 ---
 
@@ -13,7 +13,7 @@ Welcome to the Enterprise Scale for Azure VMware Solution (AVS) repository
 
 Enterprise-scale is an architectural approach and a reference implementation that enables effective construction and operationalization of landing zones on Azure, at scale. This approach aligns with the Azure roadmap and the Cloud Adoption Framework for Azure.
 
-Enterprise-scale for AVS represents the strategic design path and target technical state for an Azure VMware Solution (AVS) deployment. This solution provides an architectural approach and reference implementation to prepare landing zone subscriptions for a scalable Azure VMware Solution (AVS) cluster. For the architectural guidance, check out [Enterprise-scale for AVS in Microsoft Docs](https://docs.microsoft.com/en-us/azure/cloud-adoption-framework/scenarios/azure-vmware/enterprise-scale-landing-zone).
+Enterprise-scale for AVS represents the strategic design path and target technical state for an Azure VMware Solution (AVS) deployment. This solution provides an architectural approach and reference implementation to prepare landing zone subscriptions for a scalable Azure VMware Solution (AVS) cluster. For the architectural guidance, check out [Enterprise-scale for AVS in Microsoft Docs](https://docs.microsoft.com/azure/cloud-adoption-framework/scenarios/azure-vmware/enterprise-scale-landing-zone).
 
 <br/>
 

@@ -1,11 +1,11 @@
 
 | ARM (Portal Experience)                                      |
 | ------------------------------------------------------------ |
-| [![Deploy To Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FEnterprise-Scale-for-AVS%2Fmain%2FAVS-Landing-Zone%2FSingleRegion%2FARM%2FESLZDeploy.deploy.json) |
+| [![Deploy To Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FEnterprise-Scale-for-AVS%2Fmain%2FAVS-Landing-Zone%2Fgrenfield%2FARM%2FESLZDeploy.deploy.json) |
 
 <br/>
 
-# AVS Landing Zone: Single Region Deployment
+# AVS Landing Zone: Greenfield Deployment
 
 The following is a reference implementation to deploy an AVS Landing Zone in a single region. This reference implementation is ideal for customers that have started their journey with an Enterprise-Scale foundation implementation and are looking to extend this with an AVS landing zone.
 
@@ -17,7 +17,7 @@ To deploy this landing zone, ensure you have followed all the required steps fro
 
 This reference implementation is designed in a way to deploy a full AVS Private Cloud and necessary components to allow for feature add-ins, connectivity and monitoring as per operational best practices. The intention is to deploy this into a new subscription to be considered as the AVS landing zone, adhering to the Azure Landing Zone guidance. However, this can also be deployed to an existing subscription if required.
 
-![ALZ Single Region](../../docs/images/AVS-Single-Region.png)
+![ALZ Single Region](../../docs/images/AVSSingleRegion.png)
 
 The following components will be deployed:
 
@@ -38,7 +38,7 @@ The following components will be deployed:
 
 We have a few options available to deploy this AVS Landing zone:
 
-- [ARM (Portal)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FEnterprise-Scale-for-AVS%2Fmain%2FAVS-Landing-Zone%2FSingleRegion%2FARM%2FESLZDeploy.deploy.json)
+- [ARM (Portal)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FEnterprise-Scale-for-AVS%2Fmain%2FAVS-Landing-Zone%2FGreenField%2FARM%2FESLZDeploy.deploy.json)
 - [ARM (Template)](ARM)
 - [Bicep (Template)](Bicep)
 
